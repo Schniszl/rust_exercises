@@ -9,7 +9,7 @@ fn no_rows() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn no_columns() {
     let input = &[""];
     let expected = &[""];
@@ -18,7 +18,7 @@ fn no_columns() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn no_mines() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -35,7 +35,7 @@ fn no_mines() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn minefield_with_only_mines() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -52,7 +52,7 @@ fn minefield_with_only_mines() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn mine_surrounded_by_spaces() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -69,7 +69,7 @@ fn mine_surrounded_by_spaces() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn space_surrounded_by_mines() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -86,7 +86,7 @@ fn space_surrounded_by_mines() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn horizontal_line() {
     let input = &[" * * "];
     let expected = &["1*2*1"];
@@ -95,7 +95,7 @@ fn horizontal_line() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn horizontal_line_mines_at_edges() {
     let input = &["*   *"];
     let expected = &["*1 1*"];
@@ -104,7 +104,7 @@ fn horizontal_line_mines_at_edges() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn vertical_line() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -125,7 +125,7 @@ fn vertical_line() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn vertical_line_mines_at_edges() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -146,7 +146,7 @@ fn vertical_line_mines_at_edges() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn cross() {
     #[rustfmt::skip]
     let (input, expected) = (&[
@@ -167,7 +167,7 @@ fn cross() {
 }
 
 #[test]
-#[ignore]
+//#[ignore]
 fn large_minefield() {
     #[rustfmt::skip]
     let (input, expected) = (&[
