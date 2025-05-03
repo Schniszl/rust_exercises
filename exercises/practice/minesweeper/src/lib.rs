@@ -1,31 +1,35 @@
 extern crate alloc;
-
 use alloc::string::{String, ToString};
 use alloc::vec;
 use alloc::vec::Vec;
 use core::convert::From;
 use core::iter::Iterator;
 
-pub fn annotate(minefield: &[&str]) -> Vec<String> {
+
+pub fn annotate(minefield: &[&str]) ->  Result<Vec<String>, String> {
     let mut field : Vec<String> = Vec::new();
     if minefield.is_empty() {
-        return field
+        return Ok(vec![]);
     }
 
     let rows = minefield.len();
     let cols = if rows > 0 { minefield[0].len() } else { 0 };
-
+    
+    // check for bad lenght
+    check_rectangular(minefield)?;
+    
     field = vec![String::from(" ".repeat(minefield[0].len()));minefield.len()];
 
     for (row_index, row) in minefield.iter().enumerate() {
         for(col_index, chr) in row.chars().enumerate(){
+            // check for bad char
+            check_char(chr,row_index,col_index)?;
             if chr == '*' {
                 field =mine_found(field, row_index, col_index,rows,cols);
-
             }
         }
     }
-    field
+    Ok(field)
 }
 
 fn mine_found(mut field: Vec<String>, row_index: usize,col_index: usize, rows: usize, cols: usize ) -> Vec<String> {
@@ -60,3 +64,32 @@ fn mine_found(mut field: Vec<String>, row_index: usize,col_index: usize, rows: u
     field
 }
 
+
+
+
+// check lenght
+fn check_rectangular(minefield: &[&str]) -> Result<(), String> {
+    let expected_len = minefield[0].len();
+    for (i, row) in minefield.iter().enumerate() {
+        if row.len() != expected_len {
+            return Err(format!(
+                "Nicht-rechteckige Eingabe: Zeile {} hat Länge {}, erwartet war {}",
+                i + 1,
+                row.len(),
+                expected_len
+            ));
+        }
+    }
+    Ok(())
+}
+
+// check char
+fn check_char(chr: char, row: usize, col: usize) -> Result<(), String> {
+    match chr {
+        '*' | ' ' => Ok(()),
+        _ => Err(format!(
+            "Ungültiges Zeichen '{}' in Zeile {}, Spalte {}",
+            chr, row + 1, col + 1
+        )),
+    }
+}
